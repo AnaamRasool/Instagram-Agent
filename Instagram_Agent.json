@@ -1,0 +1,187 @@
+{
+  "name": "Instagram Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{$json.body.contactId}}"
+      },
+      "id": "553dbc9a-f112-4d47-b60d-028ab06c17c1",
+      "name": "Local n8n memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "position": [
+        100,
+        360
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "c772871e-3ccc-44fe-8324-913dd948a22d",
+      "name": "Send respond ",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [
+        320,
+        200
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "instagram_chat",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "9ca6ebbe-5566-4929-b2ec-a5ebcc5c0df0",
+      "name": "Getting message from Instagram",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        -300,
+        200
+      ],
+      "webhookId": "68d3fbc9-6e49-4bdc-851c-2a532be911ab",
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "content": "## 3) AI block\n---\nThere is 3 nodes:\n- AI Agent\n- OpenSource Gemini pro model\n- Memory for history messages\n\n### To do:\n- In Model node you can choose the best model for you\n- In Memory Block you can change number of messages in history\n\n",
+        "height": 695,
+        "width": 314
+      },
+      "id": "9a253d64-f087-40db-93b9-c5502e4427a0",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -120
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.chatInput }}",
+        "options": {
+          "systemMessage": "You are an AI assistant for an Instagram influencer who posts about AI tools, agents, and tech. Keep answers short (1–2 lines), simple, and human-friendly. Don’t assume. Ask clarifying questions. If unsure, reply: “I’ll get back to you on that."
+        }
+      },
+      "id": "1d09cdec-bbd7-4208-89b0-be98df12edf4",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        -40,
+        200
+      ],
+      "typeVersion": 1.7
+    },
+    {
+      "parameters": {
+        "content": "## 1) HTTP Post webhook\n\n**To do:**\nJust copy production link from this node and insert to custom action in ManyChat\n\nNo edits needed",
+        "height": 440
+      },
+      "id": "15d44b3b-aa81-4bd0-8359-1cdafb48345b",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -380,
+        -60
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 4) Respond webhook\n\nNo edits needed",
+        "height": 300
+      },
+      "id": "c7f26804-1c84-428c-a084-8cc962f8e59f",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        260,
+        60
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": "deepseek/deepseek-r1-0528-qwen3-8b:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        420
+      ],
+      "id": "790ef794-9a5c-400a-9a27-22779025bbde",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "lD4knZWYlZFk5A88",
+          "name": "OpenRouter account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Local n8n memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Getting message from Instagram": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send respond ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "65e3aeaf-636c-4c4e-83dd-fb02befa2dc4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dedc19d9bdfc7243f7ee13c48a4edef60ea52cfb037e9ca16e44a41bcd75a2d3"
+  },
+  "id": "p16zoeTLPmb2pYDf",
+  "tags": []
+}
