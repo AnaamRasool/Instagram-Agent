@@ -3,9 +3,7 @@
 Automate your Instagram DMs with AI using **n8n** and **Manychat** — no coding required!  
 In this project, you’ll learn how to set up an intelligent DM responder with simple automation tools.  
 
-🔗 **Watch Full YouTube Tutorial:** [Link to YouTube Video]  
-📥 **Direct Template Import + Full Setup Guide:** [LINK]  
-(Highly recommended — includes n8n + Manychat workflows ready to use.)
+🔗 **Watch Full YouTube Tutorial:** [https://youtu.be/mO-ezWEvj5c]  
 
 ---
 
